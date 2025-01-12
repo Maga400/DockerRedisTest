@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis
+    container_name: redis-server
+    ports:
+      - "6379:6379"
+    
+  webapi:
+    image: dockerredistest:dev
+    build:
+      context: .
+      dockerfile: DockerRedisTest/Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    depends_on:
+      - redis

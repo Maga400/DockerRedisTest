@@ -1,0 +1,6 @@
+@DockerRedisTest_HostAddress = http://localhost:5072
+
+GET {{DockerRedisTest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
