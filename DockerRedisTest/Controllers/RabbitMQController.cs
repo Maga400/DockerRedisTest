@@ -24,6 +24,7 @@ namespace DockerRedisTest.Controllers
                 VirtualHost = configuration["RabbitMQ:VirtualHost"]
             };
         }
+        [HttpPost]
         public async Task PublishMessageAsync(string audioId, string message)
         {
             using var connection = _factory.CreateConnection();
@@ -43,6 +44,8 @@ namespace DockerRedisTest.Controllers
 
             await Task.CompletedTask;
         }
+
+        [HttpGet]
         public async Task<List<string>> GetMessagesAsync(string audioId)
         {
             var messages = new List<string>();
@@ -66,19 +69,6 @@ namespace DockerRedisTest.Controllers
             await Task.Delay(1000);
 
             return messages;
-        }
-
-        // GET api/<RabbitMQController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<RabbitMQController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
         }
     }
 }
